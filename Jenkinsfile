@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      label 'mypodtemplate-npm-6'
+      label 'mypodtemplate-npm-10'
       containerTemplate {
         name 'maven'
         image 'node:10-alpine'
@@ -18,6 +18,21 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm install'
+      }
+    }
+    stage('Audit') {
+      steps {
+        sh 'npm audit'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'jenkins/scripts/test.sh'
+      }
+    }
+    stage('Deliver') {
+      steps {
+        sh 'jenkins/scripts/deliver.sh'
       }
     }
   }
