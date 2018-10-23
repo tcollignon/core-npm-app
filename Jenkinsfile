@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      label 'mypodtemplate-npm-6'
+      label "mypod-${UUID.randomUUID().toString()}"
       defaultContainer 'node-container'
       yamlFile 'KubernetesPod.yaml'
     }
