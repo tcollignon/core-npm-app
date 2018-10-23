@@ -1,7 +1,8 @@
+def label = "mypod-${UUID.randomUUID().toString()}"
+
 pipeline {
   agent {
     kubernetes {
-      def label = "mypod-${UUID.randomUUID().toString()}"
       label label
       defaultContainer 'node-container'
       yamlFile 'KubernetesPod.yaml'
